@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import {
   FaHome,
   FaLink,
@@ -32,49 +31,43 @@ function AdminNavbar() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-white text-dark shadow-lg">
+    <Navbar expand="lg" className="bg-primary text-white shadow-lg">
       <Container>
-        <Navbar.Brand href="/admindashboard" className="fw-bold text-dark">
+        <Navbar.Brand href="/admindashboard" className="fw-bold text-white">
           Admin Panel
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/Event-dashboard" className="text-dark fw-semibold">
-              <FaHome className="me-2" /> Event-Details
-            </Nav.Link>
-            <Nav.Link href="/event-handling" className="text-dark fw-semibold">
-              <FaLink className="me-2" /> Event-Handeling
-            </Nav.Link>
-            <Nav.Link href="/signup" className="text-dark fw-semibold">
-              <FaSignInAlt className="me-2" /> Create-DataEnty-User
-            </Nav.Link>
-            {/* <Nav.Link href="#link" className="text-dark fw-semibold">
-              <FaLink className="me-2" /> Link
-            </Nav.Link> */}
-            {/* <NavDropdown
-              title="Actions"
-              id="basic-nav-dropdown"
-              className="text-dark"
+            <Nav.Link
+              href="/Event-dashboard"
+              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
-              <NavDropdown.Item href="#action/3.1">Action 1</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
+              <FaHome className="me-2" size={20} />
+              Event-Details
+            </Nav.Link>
+            <Nav.Link
+              href="/event-handling"
+              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
+            >
+              <FaLink className="me-2" size={20} />
+              Event-Handeling
+            </Nav.Link>
+            <Nav.Link
+              href="/signup"
+              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
+            >
+              <FaSignInAlt className="me-2" size={20} />
+              Create-DataEnty-User
+            </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link
               onClick={handleLogout}
-              className="btn btn-outline-light text-dark d-flex align-items-center"
+              className="btn btn-outline-light text-dark d-flex align-items-center py-2 px-3"
               style={{ cursor: "pointer" }}
             >
-              <FaSignOutAlt className="me-2" />
+              <FaSignOutAlt className="me-2" size={20} />
               Logout
             </Nav.Link>
           </Nav>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate } from "react-router-dom";
 import {
   FaHome,
@@ -29,26 +28,31 @@ function UserNavbar() {
     localStorage.removeItem("userId");
     navigate("/");
   };
+
   return (
-    <Navbar expand="lg" className="bg-white text-dark shadow-lg">
+    <Navbar expand="lg" className="bg-teal text-white shadow-lg">
       <Container>
-        <Navbar.Brand href="/Event-dashboard" className="fw-bold text-dark">
+        <Navbar.Brand href="/Event-dashboard" className="fw-bold text-white">
           DATAENTRY Panel
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/add-atendee" className="text-dark fw-semibold">
-              <FaHome className="me-2" /> ADD-ATTENDIES
+            <Nav.Link
+              href="/add-atendee"
+              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
+            >
+              <FaHome className="me-2" size={20} />
+              ADD-ATTENDIES
             </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link
               onClick={handleLogout}
-              className="btn btn-outline-light text-dark d-flex align-items-center"
+              className="btn btn-outline-light text-dark d-flex align-items-center py-2 px-3"
               style={{ cursor: "pointer" }}
             >
-              <FaSignOutAlt className="me-2" />
+              <FaSignOutAlt className="me-2" size={20} />
               Logout
             </Nav.Link>
           </Nav>
