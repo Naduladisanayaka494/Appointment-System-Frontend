@@ -65,6 +65,37 @@ const LoginPage = () => {
         <div className="w-75">
           <h2 className="text-center mb-4">Login</h2>
           {error && <div className="alert alert-danger">{error}</div>}
+          {/* <form onSubmit={handleLogin} className="shadow p-4 rounded bg-white">
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="form-control"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">
+              Login
+            </button>
+          </form> */}
           <form onSubmit={handleLogin} className="shadow p-4 rounded bg-white">
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
@@ -95,6 +126,20 @@ const LoginPage = () => {
             <button type="submit" className="btn btn-primary w-100">
               Login
             </button>
+
+            {/* Sign Up Link */}
+            <div className="text-center mt-3">
+              <p>
+                Don't have an account?{" "}
+                <span
+                  className="text-primary"
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                  onClick={() => navigate("/signup")}
+                >
+                  Sign Up
+                </span>
+              </p>
+            </div>
           </form>
         </div>
       </div>
