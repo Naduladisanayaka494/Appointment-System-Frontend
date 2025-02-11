@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { FaCalendarPlus, FaFilter } from "react-icons/fa";
 import moment from "moment";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2"; 
 import AdminNavbar from "./AdminNavbar";
 
 function TimeSlotPage() {
