@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/Login";
 import Dashboard from "./pages/DashBoard";
-import AdminDashboard from "./pages/AdminDashbord";
+import AdminDashboard from "./pages/Admin/AdminDashbord";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
 // import UserEvents from "./pages/UserEvents";
@@ -30,18 +30,11 @@ const App = () => {
             path="/Admin-Dasboard"
             element={
               <ProtectedRoute requiredRole="ADMIN">
-                <AdminDashboard/>
+                <AdminDashboard />
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/signup"
-            element={
-             
-                <SignUp />
-         
-            }
-          />
+          <Route path="/signup" element={<SignUp />} />
           {/* <Route
             path="/add-atendee"
             element={

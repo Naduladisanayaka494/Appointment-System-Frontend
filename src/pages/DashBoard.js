@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import AdminNavbar from "../pages/AdminNavbar";
-import UserNavbar from "../pages/UserNavbar";
+import AdminNavbar from "./Admin/AdminNavbar";
+import UserNavbar from "./User/UserNavbar";
 
 const Dashboard = () => {
   const { auth } = useContext(AuthContext);

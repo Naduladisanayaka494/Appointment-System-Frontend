@@ -6,14 +6,12 @@ import { Button, Table, Container, Row, Col, Form } from "react-bootstrap";
 import AdminNavbar from "./AdminNavbar";
 
 function AdminDashboard() {
-  
-
   return (
     <Container id="dashboard-content" className="mt-4">
       <div>
-              <AdminNavbar />
-              <br />
-              <h1>This is Admin panel</h1>
+        <AdminNavbar />
+        <br />
+        <h1>This is Admin panel</h1>
       </div>
     </Container>
   );
