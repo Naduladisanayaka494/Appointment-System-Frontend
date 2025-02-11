@@ -89,7 +89,7 @@ const SignUpPage = () => {
               <span
                 className="text-primary"
                 style={{ cursor: "pointer", textDecoration: "underline" }}
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
               >
                 Login
               </span>
