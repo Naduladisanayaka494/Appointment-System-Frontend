@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/Login";
-// import Dashboard from "./pages/Dashboard";
-// import EventDashboard from "./pages/EventDashboard";
+import Dashboard from "./pages/DashBoard";
+import AdminDashboard from "./pages/AdminDashbord";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
 // import UserEvents from "./pages/UserEvents";
@@ -18,22 +18,22 @@ const App = () => {
       <div className="app-container">
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          {/* <Route
+          <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
-          /> */}
-          {/* <Route
-            path="/Event-dashboard"
+          />
+          <Route
+            path="/Admin-Dasboard"
             element={
               <ProtectedRoute requiredRole="ADMIN">
-                <EventDashboard />
+                <AdminDashboard/>
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/signup"
             element={
