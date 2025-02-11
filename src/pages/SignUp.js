@@ -1,36 +1,44 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { Spinner } from "react-bootstrap";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
+    setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/signup",
-        {
-          name,
-          email,
-          password,
-        }
-      );
-      setSuccess("Account created successfully! Redirecting...");
+      await axios.post("http://localhost:8080/api/auth/signup", {
+        name,
+        email,
+        password,
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Account Created!",
+        text: "Redirecting to login...",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      setError(
-        err.response?.status === 406
-          ? "Email already exists. Try another."
-          : "Signup failed. Please try again."
-      );
+      Swal.fire({
+        icon: "error",
+        title: "Signup Failed",
+        text:
+          err.response?.status === 406
+            ? "Email already exists. Try another."
+            : "Signup failed. Please try again.",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,8 +46,11 @@ const SignUpPage = () => {
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className="shadow p-4 rounded bg-white w-50">
         <h2 className="text-center mb-4">Sign Up</h2>
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
+        {loading && (
+          <div className="text-center mb-3">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        )}
         <form onSubmit={handleSignUp}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
@@ -80,8 +91,12 @@ const SignUpPage = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100">
-            Sign Up
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={loading}
+          >
+            {loading ? "Signing Up..." : "Sign Up"}
           </button>
           <div className="text-center mt-3">
             <p>
