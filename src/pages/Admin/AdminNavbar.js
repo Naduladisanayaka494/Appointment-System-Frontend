@@ -33,7 +33,7 @@ function AdminNavbar() {
   return (
     <Navbar expand="lg" className="bg-primary text-white shadow-lg">
       <Container>
-        <Navbar.Brand href="/admindashboard" className="fw-bold text-white">
+        <Navbar.Brand href="/Admin-Dasboard" className="fw-bold text-white">
           Admin Panel
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -43,6 +43,13 @@ function AdminNavbar() {
               href="/Event-dashboard"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
+              <Nav.Link
+                href="/Time-Slot"
+                className="text-white fw-semibold d-flex align-items-center py-2 px-3"
+              >
+                <FaSignInAlt className="me-2" size={20} />
+                Create-Time-Slots
+              </Nav.Link>
               <FaHome className="me-2" size={20} />
               Event-Details
             </Nav.Link>
@@ -51,14 +58,7 @@ function AdminNavbar() {
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
               <FaLink className="me-2" size={20} />
-              Event-Handeling
-            </Nav.Link>
-            <Nav.Link
-              href="/signup"
-              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
-            >
-              <FaSignInAlt className="me-2" size={20} />
-              Create-DataEnty-User
+              Appointment-Details
             </Nav.Link>
           </Nav>
           <Nav>

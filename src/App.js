@@ -11,6 +11,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // import RegisterAttendee from "./pages/RegisterAttendee";
 // import EventPage from "./pages/EventPage";
 import SignUp from "./pages/SignUp";
+import TimeSlot from "./pages/Admin/TimeSlot";
 
 const App = () => {
   return (
@@ -23,6 +24,22 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Admin-Dasboard"
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Time-Slot"
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <TimeSlot />
               </ProtectedRoute>
             }
           />
