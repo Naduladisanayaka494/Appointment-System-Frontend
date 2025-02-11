@@ -10,9 +10,11 @@ import {
   Form,
   Spinner,
 } from "react-bootstrap";
-import { FaCalendarPlus, FaFilter } from "react-icons/fa";
+import { FaCalendarPlus, FaFilter, FaFilePdf } from "react-icons/fa";
 import moment from "moment";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import AdminNavbar from "./AdminNavbar";
 
 function TimeSlotPage() {
@@ -28,6 +30,27 @@ function TimeSlotPage() {
   useEffect(() => {
     fetchTimeSlots();
   }, []);
+    
+      const createTimeSlot = async () => {
+        if (newStartTime) {
+          try {
+            const formattedStartTime = moment(newStartTime)
+              .local()
+              .format("YYYY-MM-DDTHH:mm:ss");
+
+            await axios.post("http://localhost:8080/api/slots/create", null, {
+              params: { startTime: formattedStartTime },
+            });
+
+            setShowModal(false);
+            Swal.fire("Success", "Time slot created successfully!", "success");
+            fetchTimeSlots();
+          } catch (error) {
+            console.error("Error creating time slot:", error);
+            Swal.fire("Error", "Failed to create time slot.", "error");
+          }
+        }
+      };
 
   const fetchTimeSlots = async () => {
     setLoading(true);
@@ -54,30 +77,17 @@ function TimeSlotPage() {
     setLoading(false);
   };
 
-  const createTimeSlot = async () => {
-    if (newStartTime) {
-      try {
-        const formattedStartTime = moment(newStartTime)
-          .local()
-          .format("YYYY-MM-DDTHH:mm:ss");
-
-        await axios.post("http://localhost:8080/api/slots/create", null, {
-          params: { startTime: formattedStartTime },
-        });
-
-        setShowModal(false);
-        Swal.fire("Success", "Time slot created successfully!", "success");
-        fetchTimeSlots();
-      } catch (error) {
-        console.error("Error creating time slot:", error);
-        Swal.fire("Error", "Failed to create time slot.", "error");
-      }
-    }
-  };
-
-  const handleFilterSubmit = () => {
-    setFilterModal(false);
-    fetchTimeSlots();
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Appointment Time Slots Report", 14, 10);
+    doc.autoTable({
+      head: [["Start Time", "Is Booked"]],
+      body: timeSlots.map((slot) => [
+        moment(slot.startTime).format("YYYY-MM-DD HH:mm"),
+        slot.isBooked ? "Yes" : "No",
+      ]),
+    });
+    doc.save("TimeSlotsReport.pdf");
   };
 
   return (
@@ -100,6 +110,9 @@ function TimeSlotPage() {
         <Col className="text-end">
           <Button variant="info" onClick={() => setFilterModal(true)}>
             <FaFilter /> Filter
+          </Button>
+          <Button variant="danger" className="ms-2" onClick={downloadPDF}>
+            <FaFilePdf /> Download PDF
           </Button>
         </Col>
       </Row>
@@ -140,8 +153,6 @@ function TimeSlotPage() {
           </Table>
         </Col>
       </Row>
-
-      {/* Modal for Creating Time Slot */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Create New Time Slot</Modal.Title>
@@ -167,15 +178,13 @@ function TimeSlotPage() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* Filter Modal */}
       <Modal show={filterModal} onHide={() => setFilterModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Filter Time Slots</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="startDate">
+            <Form.Group controlId="formStartDate">
               <Form.Label>Start Date</Form.Label>
               <Form.Control
                 type="date"
@@ -183,8 +192,7 @@ function TimeSlotPage() {
                 onChange={(e) => setStartDate(e.target.value)}
               />
             </Form.Group>
-
-            <Form.Group controlId="endDate">
+            <Form.Group controlId="formEndDate">
               <Form.Label>End Date</Form.Label>
               <Form.Control
                 type="date"
@@ -192,18 +200,16 @@ function TimeSlotPage() {
                 onChange={(e) => setEndDate(e.target.value)}
               />
             </Form.Group>
-
-            <Form.Group controlId="isBooked">
-              <Form.Label>Booking Status</Form.Label>
-              <Form.Control
-                as="select"
+            <Form.Group controlId="formIsBooked">
+              <Form.Label>Is Booked</Form.Label>
+              <Form.Select
                 value={isBooked}
                 onChange={(e) => setIsBooked(e.target.value)}
               >
                 <option value="">All</option>
                 <option value="true">Booked</option>
-                <option value="false">Available</option>
-              </Form.Control>
+                <option value="false">Not Booked</option>
+              </Form.Select>
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -211,7 +217,7 @@ function TimeSlotPage() {
           <Button variant="secondary" onClick={() => setFilterModal(false)}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleFilterSubmit}>
+          <Button variant="primary" onClick={fetchTimeSlots}>
             Apply Filters
           </Button>
         </Modal.Footer>

@@ -43,15 +43,15 @@ function AdminNavbar() {
               href="/Event-dashboard"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
-              <Nav.Link
-                href="/Time-Slot"
-                className="text-white fw-semibold d-flex align-items-center py-2 px-3"
-              >
-                <FaSignInAlt className="me-2" size={20} />
-                Create-Time-Slots
-              </Nav.Link>
               <FaHome className="me-2" size={20} />
               Event-Details
+            </Nav.Link>
+            <Nav.Link
+              href="/Time-Slot"
+              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
+            >
+              <FaSignInAlt className="me-2" size={20} />
+              Create-Time-Slots
             </Nav.Link>
             <Nav.Link
               href="/event-handling"
