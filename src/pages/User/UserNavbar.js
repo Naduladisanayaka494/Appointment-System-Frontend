@@ -33,25 +33,16 @@ function UserNavbar() {
   return (
     <Navbar expand="lg" className="bg-primary text-white shadow-lg">
       <Container>
-        <Navbar.Brand href="/Admin-Dasboard" className="fw-bold text-white">
-        User Panel
+        <Navbar.Brand href="/User-Dashboard" className="fw-bold text-white">
+          User Panel
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {/* <Nav.Link
-              href="/Event-dashboard"
-              className="text-white fw-semibold d-flex align-items-center py-2 px-3"
-            >
-              <FaHome className="me-2" size={20} />
-              Event-Details
-            </Nav.Link> */}
             <Nav.Link
               href="/Time-Slot"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
-              <FaSignInAlt className="me-2" size={20} />
-              Create-Time-Slots
             </Nav.Link>
             <Nav.Link
               href="/event-handling"
