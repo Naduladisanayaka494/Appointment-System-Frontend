@@ -40,18 +40,22 @@ function UserDashboard() {
     setLoading(false);
   };
 
-  const loadUserAppointments = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/appointments?userId=${userId}`
-      );
-      setAppointments(response.data);
-    } catch (error) {
-      console.error("Error fetching appointments:", error);
-    }
-    setLoading(false);
-  };
+const loadUserAppointments = async () => {
+  setLoading(true);
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/appointments?userId=${userId}`
+    );
+    const filteredAppointments = response.data.filter(
+      (appt) => !appt.cancelled
+    ); // Only include non-cancelled appointments
+    setAppointments(filteredAppointments);
+  } catch (error) {
+    console.error("Error fetching appointments:", error);
+  }
+  setLoading(false);
+};
+
 
   const bookAppointment = async (timeSlotId) => {
     try {
