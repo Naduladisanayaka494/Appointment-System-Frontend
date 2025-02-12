@@ -12,6 +12,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // import EventPage from "./pages/EventPage";
 import SignUp from "./pages/SignUp";
 import TimeSlot from "./pages/Admin/TimeSlot";
+import UserDashboard from "./pages/User/UserDashboard";
 
 const App = () => {
   return (
@@ -52,14 +53,14 @@ const App = () => {
             }
           />
           <Route path="/signup" element={<SignUp />} />
-          {/* <Route
-            path="/add-atendee"
+          <Route
+            path="/User-Dashboard"
             element={
               <ProtectedRoute requiredRole="DataEntry">
-                <UserEvents />
+                <UserDashboard />
               </ProtectedRoute>
             }
-          /> */}
+          />
           {/* <Route
             path="/register-attendee/:eventId"
             element={

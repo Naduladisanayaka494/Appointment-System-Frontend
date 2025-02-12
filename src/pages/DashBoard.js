@@ -20,7 +20,7 @@ const Dashboard = () => {
     if (role === "ADMIN") {
       navigate("/Admin-Dasboard");
     } else if (role === "DataEntry") {
-      navigate("/add-atendee");
+      navigate("/User-Dashboard");
     }
   }, [auth.role, navigate]);
 

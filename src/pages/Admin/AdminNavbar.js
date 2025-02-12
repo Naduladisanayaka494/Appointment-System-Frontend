@@ -39,13 +39,13 @@ function AdminNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link
+            {/* <Nav.Link
               href="/Event-dashboard"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
               <FaHome className="me-2" size={20} />
               Event-Details
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link
               href="/Time-Slot"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
