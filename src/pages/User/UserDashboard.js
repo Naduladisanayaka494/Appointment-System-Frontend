@@ -20,7 +20,8 @@ function UserDashboard() {
   const [modalShow, setModalShow] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
-  const userId = localStorage.getItem("userId"); 
+    const userId = localStorage.getItem("userId"); 
+    console.log(selectedAppointment);
 
   useEffect(() => {
     loadTimeSlots();
@@ -48,7 +49,7 @@ const loadUserAppointments = async () => {
     );
     const filteredAppointments = response.data.filter(
       (appt) => !appt.cancelled
-    ); // Only include non-cancelled appointments
+    ); 
     setAppointments(filteredAppointments);
   } catch (error) {
     console.error("Error fetching appointments:", error);
@@ -71,28 +72,28 @@ const loadUserAppointments = async () => {
   };
 
   const viewAppointment = (appointment) => {
-    setSelectedAppointment(appointment);
-    setModalShow(true);
-  };
+      setSelectedAppointment(appointment);  
+      setModalShow(true);
+    };
+    
 
-  const cancelAppointment = async (appointmentId) => {
-    try {
-      await axios.delete(
-        `http://localhost:8080/api/appointments/${appointmentId}`
-      );
-      Swal.fire("Cancelled", "Appointment cancelled successfully.", "success");
-      loadUserAppointments();
-      setModalShow(false);
-    } catch (error) {
-      Swal.fire("Error", "Failed to cancel appointment.", "error");
-    }
-  };
+const cancelAppointment = async (appointmentId, timeSlotId) => {
+  try {
+    await axios.delete(
+      `http://localhost:8080/api/appointments?appointmentId=${appointmentId}?timeSlotId=${timeSlotId}`
+    );
+    Swal.fire("Cancelled", "Appointment cancelled successfully.", "success");
+    loadUserAppointments();
+  } catch (error) {
+    Swal.fire("Error", "Failed to cancel appointment.", "error");
+  }
+};
 
   return (
     <Container className="mt-4">
-          <UserNavbar />
-          <br />
-          <br/>
+      <UserNavbar />
+      <br />
+      <br />
       <Row>
         <Col md={6}>
           <h3>Available Time Slots</h3>
@@ -104,7 +105,6 @@ const loadUserAppointments = async () => {
                 <tr>
                   <th>Slot ID</th>
                   <th>Start Time</th>
-                  <th>End Time</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -113,7 +113,6 @@ const loadUserAppointments = async () => {
                   <tr key={slot.id}>
                     <td>{slot.id}</td>
                     <td>{slot.startTime}</td>
-                    <td>{slot.endTime}</td>
                     <td>
                       <Button
                         variant="success"
@@ -146,11 +145,11 @@ const loadUserAppointments = async () => {
                 {appointments.map((appt) => (
                   <tr key={appt.id}>
                     <td>{appt.id}</td>
-                    <td>{appt.timeSlotId}</td>
+                    <td>{appt.appointmentTime}</td>
                     <td>
                       <Button
                         variant="primary"
-                        onClick={() => viewAppointment(appt)}
+                        onClick={() => viewAppointment(appt.id)}
                       >
                         View
                       </Button>
@@ -162,8 +161,6 @@ const loadUserAppointments = async () => {
           )}
         </Col>
       </Row>
-
-      {/* Appointment Modal */}
       <Modal show={modalShow} onHide={() => setModalShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Appointment Details</Modal.Title>
@@ -179,7 +176,12 @@ const loadUserAppointments = async () => {
               </p>
               <Button
                 variant="danger"
-                onClick={() => cancelAppointment(selectedAppointment.id)}
+                onClick={() =>
+                  cancelAppointment(
+                    selectedAppointment.id,
+                    selectedAppointment.user.id
+                  )
+                }
               >
                 Cancel Appointment
               </Button>
