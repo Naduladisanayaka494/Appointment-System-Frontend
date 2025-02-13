@@ -12,7 +12,6 @@ const AppointmentFilter = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [isCancelled, setIsCancelled] = useState(null);
-
   const userId = localStorage.getItem("userId") || 1; 
 
   useEffect(() => {
