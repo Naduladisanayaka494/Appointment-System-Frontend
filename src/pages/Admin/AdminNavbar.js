@@ -54,7 +54,7 @@ function AdminNavbar() {
               Create-Time-Slots
             </Nav.Link>
             <Nav.Link
-              href="/event-handling"
+              href="/Admin-Appontments"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
               <FaLink className="me-2" size={20} />

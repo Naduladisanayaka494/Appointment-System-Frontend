@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp";
 import TimeSlot from "./pages/Admin/TimeSlot";
 import UserDashboard from "./pages/User/UserDashboard";
 import AppointmentFilter from "./pages/User/Appointment-Details";
+import AppointmentFilterAdmin from "./pages/Admin/Appointment-Details";
 
 const App = () => {
   return (
@@ -47,6 +48,14 @@ const App = () => {
             element={
               <ProtectedRoute requiredRole="ADMIN">
                 <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Admin-Appontments"
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AppointmentFilterAdmin />
               </ProtectedRoute>
             }
           />
