@@ -10,6 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import SignUp from "./pages/SignUp";
 import TimeSlot from "./pages/Admin/TimeSlot";
 import UserDashboard from "./pages/User/UserDashboard";
+import AppointmentFilter from "./pages/User/Appointment-Details";
 
 const App = () => {
   return (
@@ -55,6 +56,14 @@ const App = () => {
             element={
               <ProtectedRoute requiredRole="DataEntry">
                 <UserDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Appointment-Details"
+            element={
+              <ProtectedRoute requiredRole="DataEntry">
+                <AppointmentFilter />
               </ProtectedRoute>
             }
           />

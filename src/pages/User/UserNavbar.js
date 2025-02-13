@@ -42,10 +42,9 @@ function UserNavbar() {
             <Nav.Link
               href="/Time-Slot"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
-            >
-            </Nav.Link>
+            ></Nav.Link>
             <Nav.Link
-              href="/event-handling"
+              href="/Appointment-Details"
               className="text-white fw-semibold d-flex align-items-center py-2 px-3"
             >
               <FaLink className="me-2" size={20} />
