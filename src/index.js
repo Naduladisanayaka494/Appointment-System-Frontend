@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-// import Footer from "./components/Footer";
+import Footer from "./pages/Footer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,7 +19,8 @@ root.render(
           <App />
         </div>
       </AuthProvider>
-      {/* <Footer /> */}
+      <br/><br/>
+      <Footer />
     </div>
   </React.StrictMode>
 );
